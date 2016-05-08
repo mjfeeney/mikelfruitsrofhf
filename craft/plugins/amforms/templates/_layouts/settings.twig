@@ -1,0 +1,26 @@
+{% extends '_layouts/cp' %}
+
+{% set fullPageForm = true %}
+
+{% import '_includes/forms' as forms %}
+
+{% set crumbs = [
+    { label: craft.amForms.name, url: url('amforms') },
+    { label: 'Settings'|t, url: url('amforms/settings') },
+    { label: title, url: '#' }
+] %}
+
+{% set tabs = {
+    general: { label: 'General'|t, url: url('amforms/settings') },
+    exports: { label: 'Exports'|t, url: url('amforms/settings/exports') },
+    antispam: { label: 'AntiSpam'|t, url: url('amforms/settings/antispam') },
+    recaptcha: { label: 'reCAPTCHA'|t, url: url('amforms/settings/recaptcha') },
+    templates: { label: 'Templates'|t, url: url('amforms/settings/templates') }
+} %}
+
+{% block content %}
+    <input type="hidden" name="settingsType" value="{{ type }}">
+    <input type="hidden" name="action" value="amForms/settings/saveSettings">
+
+    {% block fields %}{% endblock %}
+{% endblock %}

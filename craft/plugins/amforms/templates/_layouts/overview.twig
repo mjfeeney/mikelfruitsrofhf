@@ -1,0 +1,43 @@
+{% extends (elementType is defined ? '_layouts/elementindex' : '_layouts/cp') %}
+
+{% if title is not defined %}
+    {% set title = craft.amForms.name %}
+{% endif %}
+
+{% set tabs = {
+    submissions: {
+        label: 'Submissions'|t,
+        url: url('amforms/submissions')
+    }
+} %}
+
+{% if currentUser.can('accessAmFormsForms') %}
+    {% set tabs = tabs|merge({ forms: {
+        label: 'Forms'|t,
+        url: url('amforms/forms')
+    } }) %}
+{% endif %}
+{% if currentUser.can('accessAmFormsFields') %}
+    {% set tabs = tabs|merge({ fields: {
+        label: 'Fields'|t,
+        url: url('amforms/fields')
+    } }) %}
+{% endif %}
+{% if currentUser.can('accessAmFormsExports') %}
+    {% set tabs = tabs|merge({ exports: {
+        label: 'Exports'|t,
+        url: url('amforms/exports')
+    } }) %}
+{% endif %}
+{% if currentUser.can('accessAmFormsSettings') %}
+    {% set tabs = tabs|merge({ settings: {
+        label: 'Settings'|t,
+        url: url('amforms/settings')
+    } }) %}
+{% endif %}
+
+{% set activeCrumb = attribute(tabs, selectedTab) %}
+{% set crumbs = [
+    { label: title, url: url('amforms') },
+    { label: activeCrumb.label, url: activeCrumb.url }
+] %}

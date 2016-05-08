@@ -1,0 +1,101 @@
+{#
+ # Get Help template
+ # ---------------
+ #
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+
+<!-- SECTION 7 -->
+{% for entry in craft.entries.section("getHelp").find() %}
+<section id="get_help">
+	<div class="row">
+
+		<div class="col-xs-12">
+			<h2 class="blue_bg">{{ entry.heading}}</h2>
+			<div class="h2_line_right_white"></div>
+		</div>
+
+		<div class="col-xs-12">
+
+			<div class="row">
+
+				<div class="col-xs-12">
+					<div class="first_heading">
+						{{ entry.secondLine }}
+					</div>
+
+					<ol class="steps">
+						<li>{{ entry.step1 }}</li>
+						<li>{{ entry.step2 }}</li>
+						<li>{{ entry.step3 }}</li>
+						<li>{{ entry.step4 }}</li>
+					</ol>
+
+					<p class="help_info">{{ entry.moreHelpInfo }}</p>
+					
+				</div>
+				<!-- end column -->
+
+
+			</div>
+			<!-- end row -->
+			
+		</div>
+		<!-- end column -->
+	</div>
+	<!-- end row -->
+
+	<div id="contact">
+		<div class="row">	
+
+			<div class="col-xs-12 col-sm-6 col-sm-push-6">
+				<div class="emergency_help">
+					<div>{{ entry.asideSectionTop }}</div>
+
+					<div><a href="tel:{{ entry.crisisHotlinePhoneNumber }}">{{ entry.crisisHotlinePhoneNumber }}</a></div>
+
+					<div>{{ entry.asideSectionBottom }}</div>
+
+					<div><a href="tel:{{ entry.rofhfPhoneNumber }}">{{ entry.rofhfPhoneNumber }}</a></div>
+				</div>
+			</div>
+			<!-- end column -->		
+
+			<div class="col-xs-12 col-sm-6 col-sm-pull-6">
+				<div class="get_help_form">
+					{{ craft.amForms.displayForm('getHelp') }}
+				</div>	
+			</div>
+			<!-- end column -->
+
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end contact -->
+
+</section>	
+<!-- END SECTION 7 -->
+{% endfor %}
+	
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

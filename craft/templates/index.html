@@ -1,0 +1,434 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+	<div class="bg_image parallax">
+	
+		<section>
+			<div class="row">
+
+				<div class="col-xs-12 col-sm-6">
+					<div id="" class="logo_img">
+						<img src="assets/img/MF_Logo-3.png">
+					</div>
+				</div>
+
+				<div class="hidden-xs col-sm-6">
+					
+					<h1>Get started on the road to recovery today.</h1>	
+					
+				</div>
+
+			</div>
+			<!-- end row -->
+		</section>
+
+	</div>
+	<!-- end bg_image -->
+
+	<!-- END SECTION 1 -->
+
+
+
+	<!-- SECTION 2 -->
+	<section id="big_bttns">
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-6">
+				<div class="help_bg_img">
+					<div class="get_help">
+						<a href="{{ siteUrl }}get-help">Get Help</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-6">
+				<div class="donate_bg_img">
+					<div class="donate">
+						
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal">
+							<input type="hidden" name="cmd" value="_donations">
+							<input type="hidden" name="business" value="mfrofhfoundation@yahoo.com">
+							<input type="hidden" name="lc" value="US">
+							<input type="hidden" name="item_name" value="Mikel Fruits Reach Out For Help Foundation">
+							<input type="hidden" name="no_note" value="0">
+							<input type="hidden" name="currency_code" value="USD">
+							<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+							<input class="big_donate" type="submit" name="submit" value="Donate">
+							<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- end row -->
+	</section>
+	<!-- END SECTION 2 -->
+
+
+
+	<!-- SECTION 3 -->
+	<section id="about">
+		<div class="row max_width">
+
+			<div class="col-xs-12">
+				<h2 class="white_bg">Who we are and what we do.</h2>
+				<div class="h2_line_right_blue"></div>
+			</div>
+
+
+			<div class="col-xs-12">
+				
+				{{ entry.whoWeAre }}
+				
+			</div>
+		</div>
+	</section>
+	<!-- END SECTION 3 -->
+
+
+
+	<!-- SECTION 4 -->
+	<section id="events">
+		<div class="row">
+
+			<div class="col-xs-12 max_width">
+				<h2 class="white_bg">Fundraisers & Events</h2>
+				<div class="h2_line_right_blue"></div>
+			</div>
+
+			<div class="col-xs-12">
+
+				{% for entry in craft.entries.section('events').limit(5).find() %}
+				<div class="events_post">
+					<div class="row">
+
+						<div class="col-xs-12 col-sm-6">
+						{% for image in entry.image.limit(1) %}
+							<div class="events_image">
+								<img src="{{ image.getUrl() }}">
+							</div>
+						{% endfor %}
+						</div>
+						<!-- end column -->
+
+						<div class="col-xs-12 col-sm-6">
+							<div class="events_info">
+
+								<h3>{{ entry.title }}</h3>
+								<div class="hidden-xs event_h3_underline"></div>
+
+								<ul class="hidden-xs">
+									<li>{{ entry.eventDate | date('M j, Y')  }}</li>
+									<li>Registration: {{ entry.registrationTime }}</li>
+									<li>{{ entry.eventLocation }}</li>
+								</ul>
+
+								<div class="events_info_bottom_row">
+									<!-- Button trigger modal -->
+									<a type="button" class="learn_more" data-toggle="modal" data-target="#{{ entry.modalName }}">
+									  Learn More
+									</a>
+									
+								</div>
+
+								
+
+								<!-- Modal -->
+								<div class="modal fade" id="{{ entry.modalName }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+								        <h4 class="modal-title" id="myModalLabel">{{ entry.title }}</h4>
+								      </div>
+								      <div class="modal-body event_modal_details">
+								      	<ul class="">
+											<li>{{ entry.eventDate | date('M j, Y')  }}</li>
+											<li>Registration: {{ entry.registrationTime }}</li>
+											<li>{{ entry.eventLocation }}</li>
+											<li class="events_info_modal">{{ entry.eventsInfo }}</li>
+										</ul>
+								       
+								      </div>
+								      <div class="modal-footer">
+								        
+								        <a href="#" class="get_tickets">Get Tickets</a>
+								        
+								      </div>
+								    </div>
+								  </div>
+								</div>
+
+							</div>
+							<!-- end events_info -->
+						</div>
+						<!-- end column -->
+		
+					</div>
+					 <!-- end row -->
+				</div>
+				<!-- end events post -->
+				{% endfor %}
+
+			</div>
+			<!-- end column -->
+
+		</div>
+		<!-- end row -->
+	</section>
+	<!-- END SECTION 4 -->
+
+
+
+	<!-- SECTION 5 -->
+	<section id="mikel">
+		<div class="row max_width">
+
+			<div class="col-xs-12">
+				<h2 class="white_bg">Remembering Mikel</h2>
+				<div class="h2_line_right_blue"></div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<section class="remember_scrolling_img">
+		
+
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		  <!-- Indicators -->
+		 <!--  <ol class="carousel-indicators">
+		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		  </ol> -->
+
+
+		  <!-- Wrapper for slides -->
+		  <div class="carousel-inner" role="listbox">
+		  	  {% for image in entry.image %}
+		      <div class="item">
+		      
+				<img id="scrolling" src="{{ image.getUrl() }}">
+			 
+		      </div>
+	      	  {% endfor %}
+		  </div>
+
+
+		  <!-- Controls -->
+
+		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+
+		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+
+		</div>
+
+	</section>
+	<!-- END SECTION 5 -->
+
+	<section class="remembering_sub">
+		<div class="row max_width">
+			<div class="col-xs-12"> 
+				<a class="more_about_btn">
+					<span class="up_btn glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+					<span class="">More</span>	
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+				<p class="more_about_hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.</p>
+			</div>
+		</div>
+		
+	</section>
+
+
+
+	<!-- SECTION 6 -->
+	<section id="products">
+		<div class="row max_width">
+
+			<div class="col-xs-12 ">
+				<h2 class="white_bg">Support the cause.</h2>
+				<div class="h2_line_right_blue"></div>
+			</div>
+
+
+			
+			{% for entry in craft.entries.section('products').limit(3).find() %}
+			<!-- Small modal -->
+			<div class="modal fade" tabindex="-1" role="dialog" id="{{ entry.modalName }}">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+			        <h4 class="modal-title">{{ entry.title }}</h4>
+			      </div>
+			      <div class="modal-body">
+			        {% for image in entry.image %}
+					<img src="{{ image.getUrl() }}">
+					{% endfor %}
+			      </div>
+
+			      <div class="modal-footer">
+				      <div class="row">
+					      <div class="col-xs-12 col-sm-8">
+					      	{{ entry.details }}
+					      </div>
+
+					      <div class="col-xs-12 col-sm-4">
+					        <a class="modal_bttn">Buy</a>
+					      </div>
+					      <!-- end column -->
+				      </div>
+			      </div>
+
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+
+			<div class="col col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-0">
+
+				<div class="single_product">
+					{% for image in entry.image %}
+					<img src="{{ image.getUrl() }}">
+					{% endfor %}
+
+					<div class="product_info">
+
+						<div class="row">
+							<div class=" col-xs-12">
+								<h4>{{ entry.title }}</h4>
+							</div>
+
+							<div class="col-xs-2">{{ entry.price }}</div>
+
+							<div class="col-xs-10">
+								<div class="product_links">
+									<a href="" data-toggle="modal" data-target="#{{ entry.modalName }}">Details</a>
+								</div>
+
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+			</div>
+			{% endfor %}
+			<!-- end column -->
+			
+		</div>
+		<!-- end row -->
+
+		<div class="row max_width">
+			<div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+				<div class="products_subsection">
+					<p>{{ entry.moreInfo }}</p>
+				</div>
+			</div>
+		</div>
+		
+
+	</section>
+	<!-- END SECTION 6 -->
+
+
+
+	<!-- SECTION 7 -->
+	<section id="contact">
+		<div class="row max_width">
+
+			<div class="col-xs-12">
+				<h2 class="blue_bg">Contact Us</h2>
+				<div class="h2_line_right_white"></div>
+			</div>
+
+			<div class="col-xs-12">
+
+				<div class="contact_us_content">
+				<div class="row">
+
+					<div class="col-xs-12 col-sm-6">
+
+						<div class="contact_us">
+							{{ entry.contactParagraph }}
+						</div>
+
+						<div class="phone">
+							<a href="tel:{{ entry.phoneNumber }}">{{ entry.phoneNumber }}</a>
+						</div>
+
+						<div class"address">
+							{{ entry.address }}
+						</div>
+						
+
+						<div class="social_link_icons">
+							<a href="#"><img src="assets/img/Facebok.png"></a>
+							<a href="#"><img src="assets/img/Twitter.png"></a>
+							<a href="#"><img src="assets/img/Instagram.png"></a>
+						</div>
+
+					</div>
+					<!-- end column -->
+
+					<div class="col-xs-12 col-sm-6">
+						
+						
+						{{ craft.amForms.displayForm('contact') }}
+						
+
+					</div>
+
+				</div>
+				<!-- end row -->
+				</div>
+				<!-- end .contact_us_content -->
+				
+			</div>
+		</div>
+	</section>
+	<!-- END SECTION 7 -->
+
+
+
+	
+
+	
+
+	
+	
+{% endblock %}

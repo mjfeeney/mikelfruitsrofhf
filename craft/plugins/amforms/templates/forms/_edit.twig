@@ -1,0 +1,65 @@
+{% extends '_layouts/cp' %}
+
+{% set fullPageForm = true %}
+
+{% import '_includes/forms' as forms %}
+
+{% set title = (formId is defined ? 'Edit form'|t : 'New form'|t) %}
+
+{% set crumbs = [
+    { label: craft.amForms.name, url: url('amforms') },
+    { label: 'Forms'|t, url: url('amforms/forms') },
+    { label: title, url: '#' }
+] %}
+
+{% set tabs = {
+    form: {
+        label: "General"|t,
+        url: '#form'
+    },
+    formfields: {
+        label: "Fields"|t,
+        url: '#designer'
+    },
+    notifications: {
+        label: "Notifications"|t,
+        url: '#notification',
+        class: (form.getErrors('notificationEnabled')|length ? 'error' : null)
+    }
+} %}
+{% if currentUser.admin %}
+    {% set tabs = tabs|merge({
+        templates: {
+            label: "Templates"|t,
+            url: '#templates'
+        }
+    }) %}
+{% endif %}
+
+{% block main %}
+    <input type="hidden" name="action" value="amForms/forms/saveForm">
+    <input type="hidden" name="redirect" value="amforms/forms/edit/{id}">
+    {% if formId is defined -%}<input type="hidden" name="formId" value="{{ formId }}">{% endif %}
+
+    <div class="pane">
+        {% include "_includes/tabs" %}
+
+        <div id="form">
+            {% include 'amforms/forms/_fields/form' %}
+        </div>
+
+        <div id="designer" class="hidden">
+            {% include 'amforms/forms/_fields/designer' %}
+        </div>
+
+        <div id="notification" class="hidden">
+            {% include 'amforms/forms/_fields/notifications' %}
+        </div>
+
+        {% if currentUser.admin -%}
+            <div id="templates" class="hidden">
+                {% include 'amforms/forms/_fields/templates' %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

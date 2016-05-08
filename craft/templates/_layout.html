@@ -1,0 +1,226 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	
+	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+	<link rel="home" href="{{ siteUrl }}" />
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ siteUrl }}assets/css/style.css">
+
+
+	<!-- jQuery -->
+
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+	<!-- JS links -->
+	<script type="text/javascript" src="{{ siteUrl }}assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ siteUrl }}assets/js/application.js"></script>
+
+
+
+</head>
+
+<body>
+	<div class="container-fluid">
+
+		<header id="header" class="navbar-fixed-top">
+	
+			<div class="row">
+
+				<div class="hidden-xs col-sm-12">
+
+					<nav>
+						<ul class="main_nav">
+
+							<li><a href="{{ siteUrl }}"><img src="{{ siteUrl }}assets/img/MF_Icon.png"></a></li>
+
+							<li><a href="{{ siteUrl }}#about">About</a></li>
+
+							<li><a href="{{ siteUrl }}#events">Events</a></li>
+
+							<li><a href="{{ siteUrl }}#mikel">Remembering Mikel</a></li>
+
+							<li><a href="{{ siteUrl }}#products">Products</a></li>
+
+							<li><a href="{{ siteUrl }}#contact">Contact</a></li>
+
+							
+							<li class="nav_btns"><a href="{{ siteUrl }}get-help">Get Help</a></li>
+							
+							
+
+							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal">
+								<input type="hidden" name="cmd" value="_donations">
+								<input type="hidden" name="business" value="mfrofhfoundation@yahoo.com">
+								<input type="hidden" name="lc" value="US">
+								<input type="hidden" name="item_name" value="Mikel Fruits Reach Out For Help Foundation">
+								<input type="hidden" name="no_note" value="0">
+								<input type="hidden" name="currency_code" value="USD">
+								<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+								<input class="paypal_donate" type="submit" name="submit" value="Donate">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+							</form>
+							
+
+						</ul>
+						<!-- end main_nav (flexbox) -->
+					</nav>
+
+				</div>
+				<!-- end column -->
+				
+			</div>
+			<!-- end row -->
+
+
+
+			<!-- mobile nav-bar -------------------------------->
+
+	
+			<ul class="mobile_nav_bar">
+				<div class="visible-xs row">
+					
+					<div class="col-xs-5">
+						<li class="mobile_help_btn">
+							<a href="{{ siteUrl }}get-help">Get Help</a>
+						</li>
+					</div>
+
+					<div class="col-xs-5">
+						<li class="mobile_donate_btn">
+							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal">
+								<input type="hidden" name="cmd" value="_donations">
+								<input type="hidden" name="business" value="mfrofhfoundation@yahoo.com">
+								<input type="hidden" name="lc" value="US">
+								<input type="hidden" name="item_name" value="Mikel Fruits Reach Out For Help Foundation">
+								<input type="hidden" name="no_note" value="0">
+								<input type="hidden" name="currency_code" value="USD">
+								<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+								<input class="donate_mobile" type="submit" name="submit" value="Donate">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+							</form>
+						</li>
+					</div>
+
+					<div class="col-xs-2">
+						<li class="menu_icon">
+							<div class="menu_icon_outline">
+								<div class="menu_icon_line bar1"></div>
+								<div class="menu_icon_line bar2"></div>
+								<div class="menu_icon_line bar3"></div>
+							</div>
+						</li>
+					</div>
+
+				</div>
+			</ul>
+
+
+			<div class="slide_in_navbar hidden-sm hidden-md hidden-lg hidden-xlg">
+
+				<nav class="">
+					<ul class="mobile_nav_outline">
+						<div class="mobile_nav_links">
+							<li><a href="{{ siteUrl }}#about">About</a></li>
+
+							<li><a href="{{ siteUrl }}#events">Events</a></li>
+
+							<li><a href="{{ siteUrl }}#mikel">Remembering Mikel</a></li>
+
+							<li><a href="{{ siteUrl }}#products">Products</a></li>
+
+							<li><a href="{{ siteUrl }}#contact">Contact</a></li>
+						</div>
+
+						<div class="social_mobile_nav">
+
+							<li><a href="#"><img src="assets/img/Facebok.png"></a></li>
+							<li><a href="#"><img src="assets/img/Twitter.png"></a></li>
+							<li><a href="#"><img src="assets/img/Instagram.png"></a></li>
+							
+						</div>
+
+						<li class="mobile_nav_phone"><a href="tel:317-428-9133">317.428.9133</a></li>
+					</ul>
+				</nav>
+
+			</div>
+
+
+			<!-- end mobile nav-bar ---------------------------------------->
+
+			
+		</header>
+
+
+
+
+
+
+		<main id="content" role="main">
+			{% block content %}
+				<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+				<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+			{% endblock %}
+		</main>
+
+		<footer id="footer">
+			<div class="row">
+				<div class="col-xs-12">
+					Copyright {{ now.year }} Mikel Fruits Reach Out For Help Foundation Inc.
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script type="text/javascript">
+		(function(){
+
+		  var parallax = document.querySelectorAll(".parallax"),
+		      speed = 0.45;
+
+		  window.onscroll = function(){
+		    [].slice.call(parallax).forEach(function(el,i){
+
+		      var windowYOffset = window.pageYOffset,
+		          elBackgrounPos = "50% " + -(windowYOffset * speed) + "px";
+
+		      el.style.backgroundPosition = elBackgrounPos;
+
+		    });
+		  };
+
+		})();
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+

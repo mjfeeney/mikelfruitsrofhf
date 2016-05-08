@@ -1,0 +1,34 @@
+{#
+ # Events entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a Events entry’s URL is
+ # requested. That’s because the Events section’s Template setting is
+ # set to “Events/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested Events entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<article class="single_event_entry">
+		<h1>{{ entry.title }}</h1>
+		<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
+
+		<div class="row">
+		{% for image in entry.image %}
+			<div class="col-xs-6">
+				<div class="events_image">
+					<img src="{{ image.getUrl() }}">
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+		
+	</article>
+{% endblock %}
